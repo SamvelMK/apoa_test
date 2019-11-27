@@ -1,0 +1,50 @@
+
+.label.form-check-input{
+    border-right: solid;
+    border-width: 1px;
+}
+
+table{
+    margin-top: 3%;
+}
+
+thead{
+    border-top: 2.3px solid black; 
+    border-bottom: 2.3px solid black; 
+    text-align: center;
+}
+
+tbody{
+    border: solid;
+    border-width: 1px;
+}
+
+td{
+    border: solid;
+    padding-left: .20cm;
+    padding-right: .20cm;
+    border-width: 1px;
+    text-align: center;
+}
+
+tr{
+    border-top: solid;
+    border-width: 1px;
+}
+
+th{
+    border: solid;
+    border-width: 1px;
+    width: 2%;
+    padding: 1%;
+
+}
+
+
+button{
+    margin-right: 4.8cm;
+}
+
+a{
+    color: white;
+}

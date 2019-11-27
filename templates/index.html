@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Css stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+
+  <!-- icons -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <!-- Font Awesome -->
+  <script src="https://use.fontawesome.com/c46cb936a4.js"></script>
+
+  <!-- weird stuff for favicon.io error -->
+  <link rel="shortcut icon" href="#">
+
+  <!-- Vue.js -->
+  <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+  <title> Test! </title>
+</head>
+
+<body>
+
+  <form id="test" @submit.prevent="submitData">
+    <div class="container" style="padding-top: 8ex; min-height: 85vh">
+
+      <div class="jumbotron" style="margin-bottom: 15;">
+        <div v-if="modal" style="background-color:lightgrey; opacity: 0.9; height: 100%; position: absolute;">
+          <div class="container" style="background-color: indianred; margin: 15%; width: 75%;">
+            <h5 style="padding: 3%;">
+              &emsp; &emsp; Ձեր մասնակցությւունը մեզ համար շատ կարևոր է: <br> <br> &emsp; &emsp; Ցանկանում ենք մեկ անգամ
+              ևս ձեզ հիշեցնել,
+              որ Ձեր անկեղծ պատասխանները կօգնեն այս հետազոտության իրականացնմանը, որը թույլ կտա ավելի լավ հասկանալ
+              Հայասատանում ուռուցքաբանների շրջանում հուզական այրումը պայմանավորող գործոնները և մշակել կանխարգելման
+              հնարավոր եղանակաները: <br> <br>
+              &emsp; &emsp; Վստահ եք որ ցանկանում եք դադարեցնել:
+            </h5>
+            <a class="btn btn-primary btn-lg" href="http://apoa.am/" role="button"
+              style="color: white; margin-right: 80%;">
+              <span class="glyphicon glyphicon-chevron-left"></span> Այո՛ </a>
+            <a class="btn btn-primary btn-lg" v-on:click="modal = !modal" role="button" style="color: white;">
+              <span class="glyphicon glyphicon-chevron-right"></span> Ո՛չ </a>
+          </div>
+        </div>
+
+        <section v-if="step == 1">
+          <h1 class="display-4">Իրազեկ համաձայնության ձև</h1>
+          <p class="lead">
+
+            {%for i in consent %}
+            &emsp; &emsp; {{i}} <br>
+            {%endfor%}
+
+          </p>
+        </section>
+
+        <section v-if="step == 2">
+          <h1 class="display-4"> Սոցիալ դեմոգրաֆիկ տվյալներ: </h1>
+          <p class="lead">
+
+            <p>Խնդրում ենք նշել Ձեր սեռը՝</p>
+            <div class="container" style="margin-left: 3%;">
+              <div class="form-check">
+                <input v-model="answers.demographics.sex" class="form-check-input" type="radio" name="sex" id="female"
+                  value=1>
+                <label class="form-check-label" for="female">
+                  իգ
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.sex" class="form-check-input" type="radio" name="sex" id="male"
+                  value=2>
+                <label class="form-check-label" for="male">
+                  ար
+                </label>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="age"> Խնդրում ենք նշել Ձեր տարիքը՝ </label>
+                  <input v-model="answers.demographics.age" type="number" class="form-control" id="age">
+                </div>
+              </div>
+            </div>
+
+            <p>Խնդրում ենք նշել Ձեր ընտանեկան կարգավիճակը՝</p>
+            <div class="container" style="margin-left: 3%;">
+              <div class="form-check">
+                <input v-model="answers.demographics.maritalstatus" class="form-check-input" type="radio"
+                  name="maritalstatus" id="single" value=1>
+                <label class="form-check-label" for="single">
+                  Ամուրի
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.maritalstatus" class="form-check-input" type="radio"
+                  name="maritalstatus" id="married" value=1>
+                <label class="form-check-label" for="married">
+                  Ամուսնացած
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.maritalstatus" class="form-check-input" type="radio"
+                  name="maritalstatus" id="married" value=2>
+                <label class="form-check-label" for="married">
+                  Ամուսնացած, ունեմ երեխաներ
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.maritalstatus" class="form-check-input" type="radio"
+                  name="maritalstatus" id="widowed" value=3>
+                <label class="form-check-label" for="widowed">
+                  Այրի
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.maritalstatus" class="form-check-input" type="radio"
+                  name="maritalstatus" id="other" value=4>
+                <label class="form-check-label" for="other">
+                  Այլ
+                </label>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="specialty">Խնդրում ենք նշել Ձեր մասնագիտությունը՝</label>
+                  <select v-model="answers.demographics.specialty" class="form-control" id="specialty">
+                    <option value=1>Ուռուցքաբան-վիրաբույժ</option>
+                    <option value=2>Ճառագայթային-ուռուցքաբան</option>
+                    <option value=3>Քիմիաթերապևտ</option>
+                    <option value=4>Արյունաբան</option>
+                    <option value=5>Մանկական ուռուցքաբան</option>
+                    <option value=6>Կլինիկական օրդինատոր</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </p>
+
+        </section>
+
+        <section v-if="step == 3">
+          <p class="lead">
+            <div class="form-check form-check-inline" id="items">
+              <h5 class="display-7">
+
+                {%for instruction in instructions_maslach %}
+                &emsp; &emsp; {{ instruction }} <br>
+                {%endfor%}
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Երբեք</th>
+                      <th scope="col">Շատ հազվադեպ</th>
+                      <th scope="col">Հազվադեպ</th>
+                      <th scope="col">Երբեմն</th>
+                      <th scope="col">Հաճախ</th>
+                      <th scope="col">Շատ հաճախ</th>
+                      <th scope="col">Ամեն օր</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for question in questions_maslach %}
+
+                    <tr onmouseover="ChangeColor(this, true);"
+                        onmouseout="ChangeColor(this, false);">
+                      <td style="text-align: left;">{{loop.index}}) {{question}}</td>
+                      <td>
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="0">
+                      </td>
+                      <td >
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="1">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="2">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="3">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="4">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="5">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.maslach.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="maslach_{{loop.index}}" id="maslach_{{loop.index}}" value="6">
+                      </td>
+                    </tr>
+                    {%endfor%}
+                  </tbody>
+                </table>
+              </h5>
+            </div>
+          </p>
+        </section>
+
+        <section v-if="step == 4">
+          <p class="lead">
+            <div class="form-check form-check-inline" id="items">
+              <h5 class="display-7">
+
+                {%for instruction in instructions_pil %}
+                &emsp; &emsp; {{ instruction }} <br>
+                {%endfor%}
+  
+                <table>
+                  <tbody>
+                    {%for question in questions_pil %}
+                    <tr onmouseover="ChangeColor(this, true);"
+                        onmouseout="ChangeColor(this, false);">
+                      <td style="text-align: left;">{{loop.index}}) {{question[0]}}</td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=1>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 3 </label>
+                      </td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=2>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 2 </label>
+                      </td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=3>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 1 </label>
+                      </td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=4>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 0 </label>
+                      </td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=5>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 1 </label>
+                      </td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=6>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 2 </label>
+                      </td>
+                      <td>
+                        <input v-model="answers.pil.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="pil_{{loop.index}}" id="pil_{{loop.index}}" value=7>
+                        <label class="form-check-label" for="pil_{{loop.index}}"> 3 </label>
+                      </td>
+
+                      <td style="text-align: left;" >{{question[1]}}</td>
+                    </tr>
+                  </tbody>
+                  {%endfor%}
+                </table>
+              </h5>
+            </div>
+          </p>
+        </section>
+
+        <section v-if="step == 5">
+          <p class="lead">
+            <div class="form-check form-check-inline" id="items">
+              <h5 class="display-7">
+                {%for instruction in instructions_mri %}
+                &emsp; &emsp; {{ instruction }} <br>
+                {%endfor%}
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Բացարձակապես համաձայն չեմ</th>
+                      <th scope="col">Համաձայն չեմ</th>
+                      <th scope="col">Համաձայն եմ</th>
+                      <th scope="col">Լիովին համաձայն եմ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for question in questions_mri %}
+                    <tr onmouseover="ChangeColor(this, true);"
+                        onmouseout="ChangeColor(this, false);">
+                      <td style="text-align: left;">{{loop.index}}) {{question}}</td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.mri.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="mri_{{loop.index}}" id="mri_{{loop.index}}" value="1">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.mri.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="mri_{{loop.index}}" id="mri_{{loop.index}}" value="2">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.mri.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="mri_{{loop.index}}" id="mri_{{loop.index}}" value="3">
+                      </td>
+                      <td style="text-align: center;">
+                        <input v-model="answers.mri.question_{{loop.index}}" class="form-check-input" type="radio"
+                          name="mri_{{loop.index}}" id="mri_{{loop.index}}" value="4">
+                      </td>
+                    <tr>
+                  </tbody>
+                  {%endfor%}
+                </table>
+              </h5>
+            </div>
+          </p>
+        </section>
+
+        <section v-if="step == 6">
+          <h1 class="display-4">Շնորհակալություն մասնակցության համար</h1>
+          <hr class="my-4">
+        </section>
+
+        <div class="container">
+          <hr class="my-4">
+          <a class="btn btn-primary btn-lg" v-if="step == 1" v-on:click="modal = !modal" role="button"
+            style="color: white; background-color:#8f0000; border-color: #8f0000">
+            <span class="glyphicon glyphicon-chevron-right"> Համաձայն չեմ <i style="font-size:25px" class="fa fa-times-circle-o"> </i> </span> </a>
+            
+
+          <a class="btn btn-primary btn-lg" v-if="step == 1" @click.prevent="nextStep " role="button"
+            style="margin-left: 60%; color: white; background-color: green; border-color: green;">
+            <span class="glyphicon glyphicon-chevron-left"> Համաձայն եմ <i style="font-size:25px" class="fa fa-thumbs-o-up"> </i> </span> </a>
+
+          <a class="btn btn-primary btn-lg" v-if="step != 1 & step != 5 & step !==totalsteps" @click.prevent="prevStep"
+            role="button" style="color: white; background-color: green; border-color: green;">
+            <span class="glyphicon glyphicon-chevron-left"> <i class="fa fa-angle-double-left"></i> Նախորդը  </span> </a>
+
+          <a class="btn btn-primary btn-lg" v-if="step != 1 & step != 5 & step !==totalsteps" @click.prevent="nextStep"
+            role="button" style="margin-left: 67%; color: white; background-color: green; border-color: green;">
+            <span class="glyphicon glyphicon-chevron-right"> Անցնել առաջ <i class="fa fa-angle-double-right"></i> </span> </a>
+
+          <a class="btn btn-primary btn-lg" v-if="step == 5 & step !==totalsteps" @click.prevent="prevStep" role="button"
+            style="color: white; background-color: green; border-color: green;">
+            <span class="glyphicon glyphicon-chevron-right"> <i class="fa fa-angle-double-left"></i> Նախորդը </span> </a>
+
+          <a class="btn btn-primary btn-lg" v-if="step == 5 & step !==totalsteps" @click.prevent="submitData"
+            role="button" style="margin-left: 62%; color: white; background-color: green; border-color: green;">
+            <span class="glyphicon glyphicon-chevron-right"> Վերջացնել տեստը  <i class="fa fa-smile-o"></i> </span> </a>
+          </div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer-bottom"
+      style="background-color: #961c11; position: relative; text-align: right; height: 200px;">
+      <img src="{{ url_for('static', filename = 'logo.JPG') }}" style=" position: relative;">
+    </footer>
+
+  </form>
+
+  <!-- Optional JavaScript -->
+  <script src="{{ url_for('static', filename = 'main.js') }}"></script>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS, Vue.js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
