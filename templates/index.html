@@ -329,6 +329,18 @@
         <section v-if="step == 6">
           <h1 class="display-4">Շնորհակալություն մասնակցության համար</h1>
           <hr class="my-4">
+          <section v-if="burnoutScore == true">
+            <h1> Հարգելի մասնակից`
+
+              BURNOUT MESSAGE </h1>
+          </section>
+          <section v-if="burnoutScore == false">
+            <h1> Հարգելի մասնակից`
+
+              NO BURNOUT MESSAGE 
+              
+               </h1>
+          </section>
         </section>
 
         <div class="container">
