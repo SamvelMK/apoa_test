@@ -59,9 +59,20 @@ def submit():
     sex = data_post['demographics']['sex']
     age = data_post['demographics']['age']
     marital_status = data_post['demographics']['maritalstatus']
-    specialization = data_post['demographics']['specialty']
+    specialization = data_post['demographics']['specialization']
+    speciality = data_post['demographics']['speciality']
+    yearPractice = data_post['demographics']['yearPractice']
+    workPlace = data_post['demographics']['workPlace']
+    holidays = data_post['demographics']['holidays']
+    workHours = data_post['demographics']['workHours']
+    nightShifts = data_post['demographics']['nightShifts']
+    offHours = data_post['demographics']['offHours']
+    childern = data_post['demographics']['children']
+    advancedPatients = data_post['demographics']['advancedPatients']
+    psychoSocial = data_post['demographics']['psychoSocial']
+    skillsTraining = data_post['demographics']['skillsTraining']
 
-    # Since JS outputs toISOString I need to change it to py DateTime object for SQLAlchemy.
+    # Since JS outputs ISOString I need to change it to py DateTime object for SQLAlchemy.
     created_at = data_post['date']['created_at'] 
     created_at = datetime.datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%S.%fZ") # Note that the time is in UCT.
 
@@ -70,6 +81,17 @@ def submit():
                     sex=sex, 
                     marital_status=marital_status, 
                     specialization=specialization,
+                    speciality = speciality,
+                    yearPractice = yearPractice,
+                    workPlace = workPlace,
+                    holidays = holidays,
+                    workHours = workHours,
+                    nightShifts = nightShifts,
+                    offHours = offHours,
+                    childern = childern,
+                    advancedPatients = advancedPatients,
+                    psychoSocial = psychoSocial,
+                    skillsTraining = skillsTraining,
                     created_at=created_at)
     
     

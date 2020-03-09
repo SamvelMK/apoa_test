@@ -58,7 +58,7 @@ var app = new Vue({
       }
   },
   computed: {
-    
+
     // this to compute the burnout scores based on Maslach scale. The burnoutScore is computed based the logic described at
     // https://nam.edu/valid-reliable-survey-instruments-measure-burnout-well-work-related-dimensions/
     // the burnout variable is a boolean value that is true or false based on the determined cut-off score on the given two dimensions
@@ -91,7 +91,6 @@ var app = new Vue({
       }
     }
    }
-  
 })
 
 function ChangeColor(tableRow, highLight)

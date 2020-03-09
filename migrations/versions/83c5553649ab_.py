@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 0282e1f6c081
+Revision ID: 83c5553649ab
 Revises: 
-Create Date: 2019-11-27 13:00:21.529022
+Create Date: 2020-03-09 16:34:57.333720
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0282e1f6c081'
+revision = '83c5553649ab'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,6 +29,17 @@ def upgrade():
     sa.Column('sex', sa.Integer(), nullable=False),
     sa.Column('marital_status', sa.Integer(), nullable=False),
     sa.Column('specialization', sa.Integer(), nullable=False),
+    sa.Column('speciality', sa.Integer(), nullable=False),
+    sa.Column('yearPractice', sa.Integer(), nullable=False),
+    sa.Column('workPlace', sa.Integer(), nullable=False),
+    sa.Column('holidays', sa.Integer(), nullable=False),
+    sa.Column('workHours', sa.Integer(), nullable=False),
+    sa.Column('nightShifts', sa.Integer(), nullable=False),
+    sa.Column('offHours', sa.Integer(), nullable=False),
+    sa.Column('childern', sa.Integer(), nullable=False),
+    sa.Column('advancedPatients', sa.Integer(), nullable=False),
+    sa.Column('psychoSocial', sa.Integer(), nullable=False),
+    sa.Column('skillsTraining', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )

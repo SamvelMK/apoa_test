@@ -8,13 +8,38 @@ class Users(db.Model):
     sex = db.Column(db.Integer, nullable=False)
     marital_status = db.Column(db.Integer, nullable=False)
     specialization = db.Column(db.Integer, nullable=False)
+    speciality = db.Column(db.Integer, nullable=False)
+    yearPractice = db.Column(db.Integer, nullable=False)
+    workPlace = db.Column(db.Integer, nullable=False)
+    holidays = db.Column(db.Integer, nullable=False)
+    workHours = db.Column(db.Integer, nullable=False)
+    nightShifts =  db.Column(db.Integer, nullable=False)
+    offHours = db.Column(db.Integer, nullable=False)
+    childern = db.Column(db.Integer, nullable=False)
+    advancedPatients = db.Column(db.Integer, nullable=False)
+    psychoSocial = db.Column(db.Integer, nullable=False)
+    skillsTraining = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
 
-    def __init__(self, age, sex, marital_status, specialization, created_at):
+    def __init__(self, age, sex, marital_status, specialization, 
+                    speciality, yearPractice, workPlace, holidays, 
+                    workHours, nightShifts, offHours, childern,
+                    advancedPatients, psychoSocial, skillsTraining, created_at):
         self.age = age
         self.sex = sex 
         self.marital_status = marital_status
         self.specialization = specialization
+        self.speciality = speciality
+        self.yearPractice = yearPractice
+        self.workPlace = workPlace
+        self.holidays = holidays
+        self.workHours = workHours
+        self.nightShifts =  nightShifts
+        self.offHours = offHours
+        self.childern = childern
+        self.advancedPatients = advancedPatients
+        self.psychoSocial = psychoSocial
+        self.skillsTraining = skillsTraining
         self.created_at=created_at
 
     def __repr__(self):

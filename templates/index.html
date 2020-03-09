@@ -64,9 +64,19 @@
           </p>
         </section>
 
+        <!-- Could have done this in a for-loop but have no time to change the models and views. -->
         <section v-if="step == 2">
           <h1 class="display-4"> Սոցիալ դեմոգրաֆիկ տվյալներ: </h1>
           <p class="lead">
+
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="age"> Խնդրում ենք նշել Ձեր տարիքը՝ </label>
+                  <input v-model="answers.demographics.age" type="number" class="form-control" id="age">
+                </div>
+              </div>
+            </div>
 
             <p>Խնդրում ենք նշել Ձեր սեռը՝</p>
             <div class="container" style="margin-left: 3%;">
@@ -83,15 +93,6 @@
                 <label class="form-check-label" for="male">
                   ար
                 </label>
-              </div>
-            </div>
-
-            <div class="container">
-              <div class="form-group row">
-                <div class="col-xs-2">
-                  <label for="age"> Խնդրում ենք նշել Ձեր տարիքը՝ </label>
-                  <input v-model="answers.demographics.age" type="number" class="form-control" id="age">
-                </div>
               </div>
             </div>
 
@@ -146,6 +147,119 @@
                     <option value=5>Մանկական ուռուցքաբան</option>
                     <option value=6>Կլինիկական օրդինատոր</option>
                   </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="specialization">Խնդրում ենք նշել Ձեր նեղ մասնագիտացումը</label>
+                  <select v-model="answers.demographics.specialization" class="form-control" id="specialization">
+                    <option value=1>One tumour stream (e.g., breast)</option>
+                    <option value=2>General medical oncology</option>
+                    <option value=3>Radiation</option>
+                    <option value=4>Haematology</option>
+                    <option value=5>Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="yearPractice"> Խնդրում եմ նշեք քանի տարի եք բժշկական պրակտիկայով զբաղվում </label>
+                  <input v-model="answers.demographics.yearPractice" type="number" class="form-control" id="yearPractice">
+                </div>
+              </div>
+            </div>
+            <p>Խնդրում ենք նշել դուք աշխատում եք`</p>
+            <div class="container" style="margin-left: 3%;">
+              <div class="form-check">
+                <input v-model="answers.demographics.workPlace" class="form-check-input" type="radio" name="workPlace" id="urban"
+                  value=1>
+                <label class="form-check-label" for="urban">
+                  Քաղաքում
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.workPlace" class="form-check-input" type="radio" name="workPlace" id="rural"
+                  value=2>
+                <label class="form-check-label" for="male">
+                  Մարզում
+                </label>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="holidays"> Տարվա ընթացքում քանի արձակուրդային օր եք վերցնում </label>
+                  <input v-model="answers.demographics.holidays " type="number" class="form-control" id="holidays">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="workHours"> Շաբաթական քանի ժամ եք աշխատում </label>
+                  <input v-model="answers.demographics.workHours " type="number" class="form-control" id="workHours">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="nightShifts"> Շաբաթական քանի գիշերային հերթափոխություն եք ունենում  </label>
+                  <input v-model="answers.demographics.nightShifts " type="number" class="form-control" id="nightShifts">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="offHours"> Շաբաթական աշխատանքային ժամից դուրս քանի ժամ եք աշխատում (առանց փողհատուցման):  </label>
+                  <input v-model="answers.demographics.offHours " type="number" class="form-control" id="offHours">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="childern"> Քանի երեխա ունեք  </label>
+                  <input v-model="answers.demographics.childern " type="number" class="form-control" id="childern">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="advancedPatients"> Շաբաթական քանի ժամ եք աշխատում ադվանսեդ քաղցկեղով պացիենտների հետ:  </label>
+                  <input v-model="answers.demographics.advancedPatients " type="number" class="form-control" id="advancedPatients">
+                </div>
+              </div>
+            </div>
+            <p>Ձեր հաստատությունում գործում է հոգեսոցիալական աջակցման ծառայություններ պացիենտների համար:</p>
+            <div class="container" style="margin-left: 3%;">
+              <div class="form-check">
+                <input v-model="answers.demographics.psychoSocial" class="form-check-input" type="radio" name="psychoSocial" id="Yes"
+                  value=1>
+                <label class="form-check-label" for="Yes">
+                  Այո
+                </label>
+              </div>
+              <div class="form-check">
+                <input v-model="answers.demographics.psychoSocial" class="form-check-input" type="radio" name="psychoSocial" id="No"
+                  value=2>
+                <label class="form-check-label" for="No">
+                  Ոչ
+                </label>
+              </div>
+            </div>
+            <div class="container">
+              <div class="form-group row">
+                <div class="col-xs-2">
+                  <label for="skillsTraining"> Հմտությունների զարգացման քանի դասընթացի եք մասնակցում տարեկան:  </label>
+                  <input v-model="answers.demographics.skillsTraining " type="number" class="form-control" id="skillsTraining">
                 </div>
               </div>
             </div>
@@ -330,16 +444,21 @@
           <h1 class="display-4">Շնորհակալություն մասնակցության համար</h1>
           <hr class="my-4">
           <section v-if="burnoutScore == true">
-            <h1> Հարգելի մասնակից`
+            <h4> Հարգելի մասնակից`
 
-              BURNOUT MESSAGE </h1>
+              Հարգելի մասնակից, <br>
+              Ձեր կողմից լրացված հարցարանների հիման վրա ստացած տվյալները անհանգստացնող են՝ հուզական այրման արտահայտվածության տեսանկյունից։
+               Խնդրում ենք ուշադրություն դարձնել Ձեր հոգեբանական բարեկեցության և ինքնախնամքի հարցերին։ Հարցեր ունենալու դեպքում կարող եք կապ 
+               հաստատել այս հետազոտության համակարգող, կլինիկական հոգեբան՝ Եվա Ասրիբաբայանի հետ, հեռ․՝ 093058794։ </h4>
+
           </section>
           <section v-if="burnoutScore == false">
-            <h1> Հարգելի մասնակից`
+            <h4> Հարգելի մասնակից` <br>
 
-              NO BURNOUT MESSAGE 
+              Համաձայն Ձեր կողմից լրացված հարցարանների հիման վրա ստացած տվյալների Դուք չունեք հուզական այրման արտահայտված մակարդակ: 
+              Շարունակեք հոգ տանել Ձեր մասին՝ հետագայում հուզական այրման առաջացումը կանխելու նպատակով:  
               
-               </h1>
+               </h4>
           </section>
         </section>
 
